@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome Checker - freeCodeCamp Javascript Projects</title>
+</head>
+<link rel="stylesheet" href="">
+<style>
+    body{
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #222;
+        color: #222;
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+    }
+    input, button{
+        font-size: 1em;
+        border-radius: 5px;
+        padding: 0.5em;       
+        border: none;
+    }
+    button{
+        background-color: rgb(233, 164, 37);
+    }
+    h1, p{
+        margin: 0 auto;
+        text-align: center;
+        color: #eee;        
+        max-width: 600px;
+    }
+    .card{
+        margin: 0 auto;
+        padding: 1em 2em;        
+        width: 80%;
+        border-radius: 20px;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;        
+        gap: 1.4em;
+        background-color: #eee;
+        min-height: 200px;
+    }
+    .card__text{
+        font-size: 1.4em;
+    }
+</style>
+<body>
+    <h1>Palindrome Checker</h1>
+    <p>A palindrome is a word or sentence that's spelled the same way both forward and backward, ignoring punctuation, case,
+        and spacing.</p>
+    <section class="card">
+        <span class="card__text">Is it a Palindrome?</span>
+        <input type="text"  id="text-input" placeholder="Enter in text to check for a palindrome:">
+        <button id="check-btn" onclick=checkPalindrome()>check</button>
+        <span id="result" class="card__text"></span>
+    </section>
+    
+</body>
+<script>
+    const $d = document;
+    const $textInput = $d.getElementById("text-input");               
+    const $result = $d.getElementById("result");
+    
+    function checkPalindrome() {  
+        const regexLettersOnly = /[^a-zA-Z0-9]/g;
+        const lettersOnly = $textInput.value.replace(regexLettersOnly, '').toUpperCase();
+        const lettersOnlyArray = lettersOnly.split("");
+        const lettersOnlyArrayLength = lettersOnlyArray.length;
+        console.log(lettersOnlyArray)
+        if ($textInput.value == ''){
+            alert("Please input a value");            
+        }else{
+            let isPalindrome = true;
+            for(let i = 0; i < lettersOnlyArrayLength; i++){
+                //console.log(lettersOnlyArray[i], lettersOnlyArray[lettersOnlyArrayLength -1 - i]);
+                if (lettersOnlyArray[i] !== lettersOnlyArray[lettersOnlyArrayLength -1 - i]){
+                    isPalindrome = false;
+                }
+            }
+            console.log(isPalindrome);
+           // $result.innerText = `is a palindrome` `nope is not a palindrome`;
+           $result.innerText = isPalindrome ? `${$textInput.value} is a palindrome` : `${$textInput.value} is not a palindrome`; 
+        }
+    }
+</script>
+</html>
